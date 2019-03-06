@@ -18,6 +18,7 @@ const OS_TABLE: &'static [(&'static str, &'static str)] = &[
     ("haiku", "haiku"),
     ("hermit", "hermit"),
     ("ios", "ios"),
+    ("watchos", "watchos"),
     ("l4re", "l4re"),
     ("linux", "linux"),
     ("mingw32", "windows"),

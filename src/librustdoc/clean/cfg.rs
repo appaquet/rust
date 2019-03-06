@@ -339,6 +339,7 @@ impl<'a> fmt::Display for Html<'a> {
                         "fuchsia" => "Fuchsia",
                         "haiku" => "Haiku",
                         "ios" => "iOS",
+                        "watchos" => "watchOS",
                         "l4re" => "L4Re",
                         "linux" => "Linux",
                         "macos" => "macOS",

@@ -34,10 +34,10 @@ pub const unwinder_private_data_size: usize = 5;
 #[cfg(target_arch = "x86_64")]
 pub const unwinder_private_data_size: usize = 6;
 
-#[cfg(all(target_arch = "arm", not(target_os = "ios")))]
+#[cfg(all(target_arch = "arm", not(any(target_os = "ios", target_os = "watchos"))))]
 pub const unwinder_private_data_size: usize = 20;
 
-#[cfg(all(target_arch = "arm", target_os = "ios"))]
+#[cfg(all(target_arch = "arm", any(target_os = "ios", target_os = "watchos")))]
 pub const unwinder_private_data_size: usize = 5;
 
 #[cfg(target_arch = "aarch64")]
@@ -83,7 +83,7 @@ extern "C" {
 }
 
 cfg_if! {
-if #[cfg(all(any(target_os = "ios", target_os = "netbsd", not(target_arch = "arm"))))] {
+if #[cfg(all(any(target_os = "ios", target_os = "watchos", target_os = "netbsd", not(target_arch = "arm"))))] {
     // Not ARM EHABI
     #[repr(C)]
     #[derive(Copy, Clone, PartialEq)]
@@ -207,7 +207,7 @@ if #[cfg(all(any(target_os = "ios", target_os = "netbsd", not(target_arch = "arm
     }
 }
 
-if #[cfg(not(all(target_os = "ios", target_arch = "arm")))] {
+if #[cfg(not(all(target_os = "ios", target_os="watchos", target_arch = "arm")))] {
     // Not 32-bit iOS
     extern "C" {
         #[unwind(allowed)]

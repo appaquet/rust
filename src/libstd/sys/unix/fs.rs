@@ -149,6 +149,7 @@ impl FileAttr {
               target_os = "freebsd",
               target_os = "openbsd",
               target_os = "macos",
+              target_os = "watchos",
               target_os = "ios"))]
     pub fn created(&self) -> io::Result<SystemTime> {
         Ok(SystemTime::from(libc::timespec {
@@ -161,6 +162,7 @@ impl FileAttr {
                   target_os = "freebsd",
                   target_os = "openbsd",
                   target_os = "macos",
+                  target_os = "watchos",
                   target_os = "ios")))]
     pub fn created(&self) -> io::Result<SystemTime> {
         Err(io::Error::new(io::ErrorKind::Other,
@@ -339,6 +341,7 @@ impl DirEntry {
 
     #[cfg(any(target_os = "macos",
               target_os = "ios",
+              target_os = "watchos",
               target_os = "linux",
               target_os = "emscripten",
               target_os = "android",
@@ -362,6 +365,7 @@ impl DirEntry {
 
     #[cfg(any(target_os = "macos",
               target_os = "ios",
+              target_os = "watchos",
               target_os = "netbsd",
               target_os = "openbsd",
               target_os = "freebsd",
@@ -532,7 +536,7 @@ impl File {
         cvt_r(|| unsafe { os_datasync(self.0.raw()) })?;
         return Ok(());
 
-        #[cfg(any(target_os = "macos", target_os = "ios"))]
+        #[cfg(any(target_os = "macos", target_os = "ios", target_os = "watchos"))]
         unsafe fn os_datasync(fd: c_int) -> c_int {
             libc::fcntl(fd, libc::F_FULLFSYNC)
         }
@@ -540,6 +544,7 @@ impl File {
         unsafe fn os_datasync(fd: c_int) -> c_int { libc::fdatasync(fd) }
         #[cfg(not(any(target_os = "macos",
                       target_os = "ios",
+                      target_os = "watchos",
                       target_os = "linux")))]
         unsafe fn os_datasync(fd: c_int) -> c_int { libc::fsync(fd) }
     }

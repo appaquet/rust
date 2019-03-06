@@ -656,6 +656,7 @@ unsafe fn embed_bitcode(cgcx: &CodegenContext<LlvmCodegenBackend>,
     llvm::LLVMSetInitializer(llglobal, llconst);
 
     let is_apple = cgcx.opts.target_triple.triple().contains("-ios") ||
+                   cgcx.opts.target_triple.triple().contains("-watchos") ||
                    cgcx.opts.target_triple.triple().contains("-darwin");
 
     let section = if is_apple {

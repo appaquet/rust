@@ -88,12 +88,12 @@ pub mod gnu {
 
     use libc::c_char;
 
-    #[cfg(not(any(target_os = "macos", target_os = "ios")))]
+    #[cfg(not(any(target_os = "macos", target_os = "ios", target_os = "watchos")))]
     pub fn get_executable_filename() -> io::Result<(Vec<c_char>, fs::File)> {
         Err(io::Error::new(io::ErrorKind::Other, "Not implemented"))
     }
 
-    #[cfg(any(target_os = "macos", target_os = "ios"))]
+    #[cfg(any(target_os = "macos", target_os = "ios", target_os = "watchos"))]
     pub fn get_executable_filename() -> io::Result<(Vec<c_char>, fs::File)> {
         use crate::env;
         use crate::os::unix::ffi::OsStrExt;

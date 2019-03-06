@@ -151,7 +151,7 @@ pub fn check(build: &mut Build) {
 
     for target in &build.targets {
         // Can't compile for iOS unless we're on macOS
-        if target.contains("apple-ios") &&
+        if (target.contains("apple-ios") || target.contains("apple-watchos")) &&
            !build.build.contains("apple-darwin") {
             panic!("the iOS target is only supported on macOS");
         }

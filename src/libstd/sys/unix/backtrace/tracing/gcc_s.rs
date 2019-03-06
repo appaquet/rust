@@ -82,7 +82,7 @@ extern fn trace_fn(ctx: *mut uw::_Unwind_Context,
     // instructions after it. This means that the return instruction
     // pointer points *outside* of the calling function, and by
     // unwinding it we go back to the original function.
-    let symaddr = if cfg!(target_os = "macos") || cfg!(target_os = "ios") {
+    let symaddr = if cfg!(target_os = "macos") || cfg!(target_os = "ios") || cfg!(target_os = "watchos") {
         ip
     } else {
         unsafe { uw::_Unwind_FindEnclosingFunction(ip) }

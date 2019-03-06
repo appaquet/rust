@@ -9,7 +9,10 @@ use crate::io::ErrorKind;
 #[cfg(all(not(rustdoc), target_os = "dragonfly"))] pub use crate::os::dragonfly as platform;
 #[cfg(all(not(rustdoc), target_os = "freebsd"))]   pub use crate::os::freebsd as platform;
 #[cfg(all(not(rustdoc), target_os = "haiku"))]     pub use crate::os::haiku as platform;
-#[cfg(all(not(rustdoc), target_os = "ios"))]       pub use crate::os::ios as platform;
+#[cfg(all(not(rustdoc), any(
+            target_os = "ios",
+            target_os = "watchos"
+            )))]                                   pub use crate::os::ios as platform;
 #[cfg(all(not(rustdoc), target_os = "macos"))]     pub use crate::os::macos as platform;
 #[cfg(all(not(rustdoc), target_os = "netbsd"))]    pub use crate::os::netbsd as platform;
 #[cfg(all(not(rustdoc), target_os = "openbsd"))]   pub use crate::os::openbsd as platform;

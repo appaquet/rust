@@ -417,6 +417,9 @@ supported_targets! {
     ("armv7-apple-ios", armv7_apple_ios),
     ("armv7s-apple-ios", armv7s_apple_ios),
 
+    ("armv7k-apple-watchos", armv7k_apple_watchos),
+    ("i386-apple-watchos", i386_apple_watchos),
+
     ("armebv7r-none-eabi", armebv7r_none_eabi),
     ("armebv7r-none-eabihf", armebv7r_none_eabihf),
     ("armv7r-none-eabi", armv7r_none_eabi),

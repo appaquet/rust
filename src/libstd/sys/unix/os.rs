@@ -43,6 +43,7 @@ extern {
     #[cfg_attr(target_os = "solaris", link_name = "___errno")]
     #[cfg_attr(any(target_os = "macos",
                    target_os = "ios",
+                   target_os = "watchos",
                    target_os = "freebsd"),
                link_name = "__error")]
     #[cfg_attr(target_os = "haiku", link_name = "_errnop")]
@@ -298,7 +299,7 @@ pub fn current_exe() -> io::Result<PathBuf> {
     }
 }
 
-#[cfg(any(target_os = "macos", target_os = "ios"))]
+#[cfg(any(target_os = "macos", target_os = "ios", target_os = "watchos"))]
 pub fn current_exe() -> io::Result<PathBuf> {
     extern {
         fn _NSGetExecutablePath(buf: *mut libc::c_char,
@@ -512,10 +513,12 @@ pub fn home_dir() -> Option<PathBuf> {
 
     #[cfg(any(target_os = "android",
               target_os = "ios",
+              target_os = "watchos",
               target_os = "emscripten"))]
     unsafe fn fallback() -> Option<OsString> { None }
     #[cfg(not(any(target_os = "android",
                   target_os = "ios",
+                  target_os = "watchos",
                   target_os = "emscripten")))]
     unsafe fn fallback() -> Option<OsString> {
         let amt = match libc::sysconf(libc::_SC_GETPW_R_SIZE_MAX) {

@@ -34,7 +34,7 @@ fn main() {
         // res_init and friends require -lresolv on macOS/iOS.
         // See #41582 and http://blog.achernya.com/2013/03/os-x-has-silly-libsystem.html
         println!("cargo:rustc-link-lib=resolv");
-    } else if target.contains("apple-ios") {
+    } else if target.contains("apple-ios") || target.contains("apple-watchos") {
         println!("cargo:rustc-link-lib=System");
         println!("cargo:rustc-link-lib=objc");
         println!("cargo:rustc-link-lib=framework=Security");
